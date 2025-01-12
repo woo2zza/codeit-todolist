@@ -14,7 +14,7 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({
   label,
   icon,
-  backgroundColor = "#EDE9FE",
+  backgroundColor = "#E2E8F0",
   textColor = "#FFFFFF",
   width = 160,
   height = 50,
@@ -28,14 +28,14 @@ const Button: React.FC<ButtonProps> = ({
         color: textColor,
         width: typeof width === "number" ? `${width}px` : width,
         height: typeof height === "number" ? `${height}px` : height,
-        border: "1px",
+        border: "2px solid black",
         borderRadius: "30px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         fontSize: "16px",
-        padding: "0 16px",
-        boxShadow: "5px 5px 1px black, -1px -1.7px 1px black",
+        padding: "3 16px",
+        boxShadow: "3px 3px 1px black",
         position: "relative",
       }}
     >

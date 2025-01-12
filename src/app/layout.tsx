@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import "./globals.css";
 
@@ -6,24 +7,29 @@ type LayoutProps = {
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const handleLogoClick = () => {
+    window.location.href = "/";
+  };
   return (
     <html lang="en">
       <body>
-        <header className="">
-          <img
-            src="/Image/Size=Small.svg"
-            alt="Mobile Logo"
-            className="mobile-logo h-8 w-auto"
-          />
-          <img
-            src="/Image/Size=Large.svg"
-            alt="Desktop/Tablet Logo"
-            className="desktop-logo h-8 w-auto"
-          />
+        <header>
+          <div onClick={handleLogoClick}>
+            <img
+              src="/Image/Size=Small.svg"
+              alt="Mobile Logo"
+              className="mobile-logo h-18 "
+            />
+            <img
+              src="/Image/Size=Large.svg"
+              alt="Desktop/Tablet Logo"
+              className="desktop-logo h-18 "
+            />
+          </div>
         </header>
 
-        <main className="flex-grow flex justify-center items-center px-4">
-          <div className="max-w-5xl w-full">{children}</div>
+        <main>
+          <div>{children}</div>
         </main>
       </body>
     </html>

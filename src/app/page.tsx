@@ -1,79 +1,90 @@
-import Typography from "./components/Typography";
-import Link from "next/link";
-import ColorBox from "./components/ColorBox";
-import Button from "./components/Button";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Typography from "../components/Typography";
+import addTodo from "@/api/todoApi";
+import GetItem from "@/components/getItem";
+import { fetchTodoItems } from "@/api/fetchTodoItems";
+
+type TodoListType = {
+  id: number;
+  name: string;
+  isCompleted: boolean;
+};
 
 export default function TodoList() {
-  const colors = [
-    { color: "#0F172A", label: "slate/900" },
-    { color: "#7C3AED", label: "violet/600" },
-    { color: "#F1F5F9", label: "slate/100" },
-    { color: "#92400E", label: "amber/800" },
-  ];
+  const [todo, setTodo] = useState("");
+  const [todoList, setTodoList] = useState<TodoListType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      try {
+        const items = await fetchTodoItems();
+        setTodoList(items);
+      } catch (err) {
+        console.error("할 일을 가져오는 중 오류 발생:", err);
+        setError("할 일을 가져오는 중 오류가 발생했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTodos();
+  }, []);
+
+  const handleSubmit = async () => {
+    if (!todo.trim()) {
+      alert("내용을 입력해주세요.");
+      return;
+    }
+    try {
+      await addTodo(todo);
+      const updatedItems = await fetchTodoItems();
+      setTodoList(updatedItems);
+      setTodo("");
+    } catch {
+      alert("요청에 실패했습니다.");
+    }
+  };
+
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
 
   return (
     <div>
-      <h1>ToDo List</h1>
-      <ul>
-        <li>
-          <Link href="/detail">go to detail</Link>
-        </li>
-      </ul>
-      <Typography size="20px" weight="bold">
-        NanumSquare Bold 20px
-      </Typography>
-      <Typography size="18px" weight="bold">
-        NanumSquare Bold 18px
-      </Typography>
-      <Typography size="16px" weight="bold">
-        NanumSquare Bold 16px
-      </Typography>
-      <Typography size="16px" weight="regular">
-        NanumSquare Regular 16px
-      </Typography>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "16px",
-        }}
-      >
-        {colors.map((colorObj, index) => (
-          <ColorBox key={index} color={colorObj.color} label={"ㅇㅇ"} />
-        ))}
+      <div className="items-center flex">
+        <input
+          type="text"
+          placeholder="할 일을 입력해주세요"
+          value={todo}
+          onChange={(e) => setTodo(e.target.value)}
+          className="flex-1 p-3 rounded-full border-2 border-black bg-[#E2E8F0]"
+          style={{
+            boxShadow: "3px 3px 1px black",
+          }}
+        />
+        <button
+          onClick={handleSubmit}
+          className="flex items-center ml-3 gap-2 px-6 py-3 font-bold rounded-full bg-[#E2E8F0] border-2 border-black"
+          style={{
+            boxShadow: "3px 3px 1px black",
+          }}
+        >
+          <img src="/Image/Frame 2610256.svg" alt="Icon" className="h-5 w-5" />
+          <Typography size="16px" weight="bold" className="desktop-logo">
+            추가하기
+          </Typography>
+        </button>
       </div>
 
-      <h1>Reusable Image Component</h1>
-      <h1>Reusable SVG Icons</h1>
-      <div>
-        <img src="/Image/done.svg" alt="Done Icon" width="50" height="50" />
-      </div>
-
-      <h1 className="text-xl font-bold mb-4">Button Examples</h1>
-      <Button label="클릭하세요" />
-      <Button
-        label="추가하기"
-        backgroundColor="#E2E8F0"
-        textColor="#FFFFFF"
-        width={150}
-        height={50}
-      />
-      <Button
-        icon={<img src="/Image/img.svg" alt="plus" width="16" height="16" />}
-        backgroundColor="#6C757D"
-        width={250}
-        label="버튼"
-        height={50}
-      />
-
-      <Button
-        label="사용자 정의 버튼"
-        icon={<img src="/Image/img.svg" alt="icon" width="16" />}
-        backgroundColor="#FF6347"
-        textColor="#FFFFFF"
-        width={150}
-        height={50}
-      />
+      <GetItem todoList={todoList} />
     </div>
   );
 }

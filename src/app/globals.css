@@ -1,25 +1,15 @@
-html,
-body {
-  box-sizing: border-box;
-  min-height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-main {
-  flex-grow: 1;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* 모바일 뷰 */
 @media (max-width: 767px) {
   body {
     background-color: lightblue;
   }
-
+  main {
+    margin: 10px 10px;
+  }
   header {
     justify-content: center;
     padding: 5px;
@@ -33,6 +23,10 @@ main {
     background-color: lightgreen;
   }
 
+  main {
+    margin: 20px 20px;
+  }
+
   header {
     justify-content: space-between;
     padding: 10px;
@@ -44,6 +38,9 @@ main {
 @media (min-width: 1200px) {
   body {
     background-color: lightcoral;
+  }
+  main {
+    margin: 30px 300px;
   }
 
   header {
