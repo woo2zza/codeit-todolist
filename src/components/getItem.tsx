@@ -17,7 +17,6 @@ type GetItemProps = {
 
 export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
   const router = useRouter();
-  // 체크 여부에 따라 리스트를 나눔
   const todos = todoList.filter((todo) => !todo.isCompleted);
   const dones = todoList.filter((todo) => todo.isCompleted);
 
@@ -31,7 +30,6 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
     }
   };
 
-  // 상세 페이지로 이동
   const goToDetail = (id: number, isCompleted: boolean, name: string) => {
     router.push(
       `/detail/${id}?isCompleted=${isCompleted}&name=${encodeURIComponent(

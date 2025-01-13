@@ -1,6 +1,5 @@
 import React from "react";
 
-// 버튼 타입 정의
 type ButtonProps = {
   label?: string;
   icon?: React.ReactNode;

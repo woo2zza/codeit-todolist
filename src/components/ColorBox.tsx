@@ -1,6 +1,5 @@
 import React from "react";
 
-// 색상 컴포넌트
 type ColorBoxProps = {
   color: string;
   label: string;
