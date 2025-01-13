@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import toggleComplete from "@/api/toggleComplete";
+import Image from "next/image";
 
 type TodoListType = {
   id: number;
@@ -43,7 +44,7 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
       {/* To Do 리스트 */}
       <div className="flex-1 p-4">
         <div className="mb-5 mt-7">
-          <img src="/Image/todo.svg" alt="todo" />
+          <Image src="/Image/todo.svg" alt="todo" width={100} height={100} />
         </div>
         {todos.length > 0 ? (
           <ul>
@@ -55,10 +56,12 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
                     boxShadow: "3px 3px 1px black",
                   }}
                 >
-                  <img
+                  <Image
                     src="/Image/circle.svg"
                     alt="Icon"
-                    className="w-10 h-10 mr-5"
+                    width={40}
+                    height={40}
+                    className="mr-5"
                     onClick={() => handleToggle(todo)}
                   />
                   <div
@@ -75,7 +78,12 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
         ) : (
           <div>
             <div className="flex justify-center items-center mt-[60px]">
-              <img src="/Image/nothingDoneLarge.svg" alt="Nothing to do" />
+              <Image
+                src="/Image/nothingDoneLarge.svg"
+                alt="Nothing"
+                width={200}
+                height={200}
+              />
             </div>
             <div className="flex justify-center items-center text-center text-gray-400">
               할 일이 없어요.
@@ -88,7 +96,7 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
       {/* Done 리스트 */}
       <div className="flex-1  rounded-lg p-4 ">
         <div className="mb-5 mt-7">
-          <img src="/Image/done.svg" alt="todo" />
+          <Image src="/Image/done.svg" alt="todo" width={100} height={100} />
         </div>
         {dones.length > 0 ? (
           <ul>
@@ -100,10 +108,12 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
                     boxShadow: "3px 3px 1px black",
                   }}
                 >
-                  <img
+                  <Image
                     src="/Image/Property 1=Frame 2610233.svg"
                     alt="Icon"
                     className="w-10 h-10 mr-5"
+                    width={40}
+                    height={40}
                     onClick={() => handleToggle(todo)}
                   />
                   <div
@@ -121,7 +131,12 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
         ) : (
           <div>
             <div className="flex justify-center items-center mt-[60px]">
-              <img src="/Image/nothingLarge.svg" alt="Nothing" />
+              <Image
+                src="/Image/nothingLarge.svg"
+                alt="Nothing"
+                width={200}
+                height={200}
+              />
             </div>
             <div className="mt-[20px] flex justify-center items-center text-center text-gray-400">
               아직 다 한 일이 없어요.

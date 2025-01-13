@@ -15,6 +15,7 @@ export default async function updateDetail(
 ) {
   try {
     const { id, ...data } = todoDetail;
+    console.log("ID는 사용되지 않습니다:", id);
     const response = await fetch(
       `https://assignment-todolist-api.vercel.app/api/woo2zza/items/${todoId}`,
       {

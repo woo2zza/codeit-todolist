@@ -5,6 +5,7 @@ import GetItem from "@/components/getItem";
 import { fetchTodoItems } from "@/api/fetchTodoItems";
 import addTodo from "@/api/todoApi";
 import Typography from "@/components/Typography";
+import Image from "next/image";
 
 type TodoListType = {
   id: number;
@@ -16,7 +17,6 @@ export default function TodoList() {
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState<TodoListType[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadTodos = async () => {
@@ -52,10 +52,6 @@ export default function TodoList() {
     return <p>로딩 중...</p>;
   }
 
-  if (error) {
-    return <p className="text-red-500">{error}</p>;
-  }
-
   const updateTodoList = (updatedTodo: TodoListType) => {
     setTodoList((prev) =>
       prev.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
@@ -86,7 +82,13 @@ export default function TodoList() {
             boxShadow: "3px 3px 1px black",
           }}
         >
-          <img src="/Image/Frame 2610256.svg" alt="Icon" className="h-5 w-5" />
+          <Image
+            src="/Image/Frame 2610256.svg"
+            alt="Icon"
+            width={20}
+            height={20}
+          />
+
           <Typography size="16px" weight="bold" className="desktop-logo">
             추가하기
           </Typography>

@@ -8,6 +8,7 @@ import updateDetail from "@/api/updateDetail";
 import deleteTodo from "@/api/deleteTodo";
 import DetailImage from "./detailImg";
 import DetailMemo from "./detailmemo";
+import Image from "next/image";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -42,6 +43,13 @@ export default function DetailPage() {
 
     fetchData();
   }, [id]);
+  if (loading) {
+    return <p>로딩 중...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
 
   const handleToggle = async () => {
     try {
@@ -107,10 +115,12 @@ export default function DetailPage() {
             }}
             onClick={handleToggle}
           >
-            <img
+            <Image
               src="/Image/Property 1=Frame 2610233.svg"
               alt="Icon"
               className="w-10 h-10 mr-5"
+              width={40}
+              height={40}
             />
             <div className="underline">{name}</div>
           </button>
@@ -123,10 +133,12 @@ export default function DetailPage() {
             onClick={handleToggle}
           >
             <div className="flex items-center justify-center">
-              <img
+              <Image
                 src="/Image/circle.svg"
                 alt="Icon"
                 className="w-10 h-10 mr-3"
+                width={40}
+                height={40}
               />
               <div className="underline">{name}</div>
             </div>
@@ -148,31 +160,39 @@ export default function DetailPage() {
 
       {isCompleted ? (
         <div className="flex mt-5 lg:justify-end justify-center">
-          <img
+          <Image
             src="/Image/edit.svg"
             alt="Icon"
             className="w-100 h-15 mr-5"
+            width={180}
+            height={15}
             onClick={handleUpdateDetail}
           />
-          <img
+          <Image
             src="/Image/delete.svg"
             alt="delete"
             className="w-100 h-15 mr-5"
+            width={180}
+            height={15}
             onClick={handleDeleteTodo}
           />
         </div>
       ) : (
         <div className="flex mt-5 lg:justify-end justify-center">
-          <img
+          <Image
             src="/Image/editwhite.svg"
             alt="Icon"
             className="w-100 h-15 mr-5"
+            width={180}
+            height={15}
             onClick={handleUpdateDetail}
           />
-          <img
+          <Image
             src="/Image/delete.svg"
             alt="delete"
             className="w-100 h-15 mr-5"
+            width={180}
+            height={15}
             onClick={handleDeleteTodo}
           />
         </div>
