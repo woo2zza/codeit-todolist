@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import toggleComplete from "@/api/toggleComplete";
 import getTodoDetail from "@/api/getTodoDetail";
 import updateDetail from "@/api/updateDetail";
+import deleteTodo from "@/api/deleteTodo";
 import DetailImage from "./detailImg";
 import DetailMemo from "./detailmemo";
 
 export default function DetailPage() {
   const { id } = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initialName = searchParams.get("name") || "";
   const initialIsCompleted = searchParams.get("isCompleted") === "true";
@@ -64,6 +66,12 @@ export default function DetailPage() {
         name,
         id: Number(id),
       };
+      if (imageUrl !== null) {
+        todoDetail.imageUrl = imageUrl;
+      }
+      if (memo.trim() !== "") {
+        todoDetail.memo = memo;
+      }
 
       const updatedData = await updateDetail(Number(id), todoDetail);
       console.log("업데이트된 데이터:", updatedData);
@@ -71,6 +79,20 @@ export default function DetailPage() {
     } catch (error) {
       console.error("수정 중 오류 발생:", error);
       alert("수정에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const handleDeleteTodo = async () => {
+    const confirmDelete = confirm("정말로 삭제하시겠습니까?");
+    if (!confirmDelete) return;
+
+    try {
+      await deleteTodo(Number(id));
+      alert("삭제가 완료되었습니다.");
+      router.push("/");
+    } catch (error) {
+      console.error("삭제 중 오류 발생:", error);
+      alert("삭제에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -136,6 +158,7 @@ export default function DetailPage() {
             src="/Image/delete.svg"
             alt="delete"
             className="w-100 h-15 mr-5"
+            onClick={handleDeleteTodo}
           />
         </div>
       ) : (
@@ -150,6 +173,7 @@ export default function DetailPage() {
             src="/Image/delete.svg"
             alt="delete"
             className="w-100 h-15 mr-5"
+            onClick={handleDeleteTodo}
           />
         </div>
       )}
