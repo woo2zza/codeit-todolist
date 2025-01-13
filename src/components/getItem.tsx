@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import toggleComplete from "@/api/toggleComplete";
 
 type TodoListType = {
@@ -15,6 +16,7 @@ type GetItemProps = {
 };
 
 export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
+  const router = useRouter();
   // 체크 여부에 따라 리스트를 나눔
   const todos = todoList.filter((todo) => !todo.isCompleted);
   const dones = todoList.filter((todo) => todo.isCompleted);
@@ -27,6 +29,15 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
       console.error("상태 변경 중 오류 발생:", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");
     }
+  };
+
+  // 상세 페이지로 이동
+  const goToDetail = (id: number, isCompleted: boolean, name: string) => {
+    router.push(
+      `/detail/${id}?isCompleted=${isCompleted}&name=${encodeURIComponent(
+        name
+      )}`
+    );
   };
 
   return (
@@ -51,7 +62,13 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
                   className="w-10 h-10 mr-5"
                   onClick={() => handleToggle(todo)}
                 />
-                {todo.name}
+                <div
+                  onClick={() =>
+                    goToDetail(todo.id, todo.isCompleted, todo.name)
+                  }
+                >
+                  {todo.name}
+                </div>
               </button>
             </li>
           ))}
@@ -79,7 +96,14 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
                   className="w-10 h-10 mr-5"
                   onClick={() => handleToggle(todo)}
                 />
-                <div className="line-through">{todo.name}</div>
+                <div
+                  onClick={() =>
+                    goToDetail(todo.id, todo.isCompleted, todo.name)
+                  }
+                  className="line-through"
+                >
+                  {todo.name}
+                </div>
               </button>
             </li>
           ))}
