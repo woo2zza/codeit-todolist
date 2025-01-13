@@ -79,7 +79,7 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
                   className="w-10 h-10 mr-5"
                   onClick={() => handleToggle(todo)}
                 />
-                {todo.name}
+                <div className="line-through">{todo.name}</div>
               </button>
             </li>
           ))}

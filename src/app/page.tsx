@@ -74,7 +74,7 @@ export default function TodoList() {
           placeholder="할 일을 입력해주세요"
           value={todo}
           onChange={(e) => setTodo(e.target.value)}
-          className="flex-1 p-3 rounded-full border-2 border-black bg-[#E2E8F0]"
+          className="flex-1 p-4 rounded-full border-2 border-black bg-[#E2E8F0]"
           style={{
             boxShadow: "3px 3px 1px black",
           }}
