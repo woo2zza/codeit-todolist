@@ -4,9 +4,6 @@
 
 /* 모바일 뷰 */
 @media (max-width: 767px) {
-  body {
-    background-color: lightblue;
-  }
   main {
     margin: 10px 10px;
   }
@@ -19,10 +16,6 @@
 
 /* 태블릿 뷰 */
 @media (min-width: 768px) and (max-width: 1200px) {
-  body {
-    background-color: lightgreen;
-  }
-
   main {
     margin: 20px 20px;
   }
@@ -36,9 +29,6 @@
 
 /* 데스크톱 뷰 */
 @media (min-width: 1200px) {
-  body {
-    background-color: lightcoral;
-  }
   main {
     margin: 30px 300px;
   }
