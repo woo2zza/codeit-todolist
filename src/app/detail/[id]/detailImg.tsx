@@ -68,7 +68,7 @@ export default function DetailImage({
             <span className="loader">로딩 중...</span>
           ) : (
             <Image
-              src={imageUrl ? "/image/Type=edit.svg" : "/image/Type=plus.svg"}
+              src={imageUrl ? "/Image/Type=edit.svg" : "/Image/Type=plus.svg"}
               alt="edit"
               width={64}
               height={64}

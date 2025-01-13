@@ -20,7 +20,7 @@ export default function DetailMemo({
 
   return (
     <article
-      className={`w-full h-[312px] bg-[url('/image/memo.svg')] rounded-[20px] bg-center bg-cover flex flex-col py-[24px] px-[16px] items-center gap-[16px]`}
+      className={`w-full h-[312px] bg-[url('/Image/memo.svg')] rounded-[20px] bg-center bg-cover flex flex-col py-[24px] px-[16px] items-center gap-[16px]`}
     >
       <Image
         src="/Image/pencil.svg"
