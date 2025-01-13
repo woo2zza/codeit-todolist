@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import checkbox_todo from "../../public/Image/Property 1=Frame 2610233.svg";
 import toggleComplete from "@/api/toggleComplete";
 
 type TodoListType = {
@@ -22,8 +21,8 @@ export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
 
   const handleToggle = async (todo: TodoListType) => {
     try {
-      await toggleComplete(todo.isCompleted, todo.id); // API 호출
-      updateTodoList({ ...todo, isCompleted: !todo.isCompleted }); // 상태 업데이트
+      await toggleComplete(todo.isCompleted, todo.id);
+      updateTodoList({ ...todo, isCompleted: !todo.isCompleted });
     } catch (error) {
       console.error("상태 변경 중 오류 발생:", error);
       alert("오류가 발생했습니다. 다시 시도해주세요.");
