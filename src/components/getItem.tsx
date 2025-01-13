@@ -2,6 +2,7 @@
 
 import React from "react";
 import checkbox_todo from "../../public/Image/Property 1=Frame 2610233.svg";
+import toggleComplete from "@/api/toggleComplete";
 
 type TodoListType = {
   id: number;
@@ -11,12 +12,23 @@ type TodoListType = {
 
 type GetItemProps = {
   todoList: TodoListType[];
+  updateTodoList: (updatedTodo: TodoListType) => void;
 };
 
-export default function GetItem({ todoList }: GetItemProps) {
+export default function GetItem({ todoList, updateTodoList }: GetItemProps) {
   // 체크 여부에 따라 리스트를 나눔
   const todos = todoList.filter((todo) => !todo.isCompleted);
   const dones = todoList.filter((todo) => todo.isCompleted);
+
+  const handleToggle = async (todo: TodoListType) => {
+    try {
+      await toggleComplete(todo.isCompleted, todo.id); // API 호출
+      updateTodoList({ ...todo, isCompleted: !todo.isCompleted }); // 상태 업데이트
+    } catch (error) {
+      console.error("상태 변경 중 오류 발생:", error);
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
     <div className="flex flex-col lg:flex-row  gap-5">
@@ -38,6 +50,7 @@ export default function GetItem({ todoList }: GetItemProps) {
                   src="/Image/circle.svg"
                   alt="Icon"
                   className="w-10 h-10 mr-5"
+                  onClick={() => handleToggle(todo)}
                 />
                 {todo.name}
               </button>
@@ -54,16 +67,21 @@ export default function GetItem({ todoList }: GetItemProps) {
 
         <ul>
           {dones.map((todo) => (
-            <li
-              key={todo.id}
-              className="flex items-center justify-between p-2 mb-2 border border-gray-300 rounded-lg shadow-sm"
-            >
-              <span className="text-gray-700">{todo.name}</span>
-              <input
-                type="checkbox"
-                className="w-5 h-5"
-                defaultChecked={todo.isCompleted}
-              />
+            <li key={todo.id} className="flex pt-1.5 pb-1.5 mb-2">
+              <button
+                className="flex items-center text-black flex-1 p-3 rounded-full border-2 border-black bg-[#EDE9FE]"
+                style={{
+                  boxShadow: "3px 3px 1px black",
+                }}
+              >
+                <img
+                  src="/Image/Property 1=Frame 2610233.svg"
+                  alt="Icon"
+                  className="w-10 h-10 mr-5"
+                  onClick={() => handleToggle(todo)}
+                />
+                {todo.name}
+              </button>
             </li>
           ))}
         </ul>
