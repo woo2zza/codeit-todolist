@@ -41,14 +41,16 @@
 
 ![alt text](README/record3.gif)
 
+![alt text](README/record4.gif)
+
 - 상세 페이지에서는 할 일에 대한 이미지와 메모를 입력할 수 있습니다.
 - 등록한 이미지와 메모는 수정하거나 삭제할 수 있습니다.
 - 할 일을 삭제하게 되면, 삭제 후 자동으로 메인페이지로 이동합니다.
 - 상세 페이지에서도 할 일의 완료 여부를 변경할 수 있습니다.
 - 메모가 특정 길이를 초과하면 자동으로 스크롤됩니다.
 
-<!-- ### 반응형
+### 반응형
 
-![alt text](README/record6.gif)
+![alt text](README/group1.png)
 
-![alt text](README/record7.gif) -->
+![alt text](README/group2.png)
