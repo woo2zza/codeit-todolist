@@ -50,7 +50,7 @@ export default function DetailImage({
         backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
       }}
       className={`flex bg-center bg-cover ${
-        !imageUrl && "border-2"
+        !imageUrl && "border-2 border-dashed border-gray-300"
       } justify-center relative w-full h-[312px] bg-slate-50 rounded-[20px]`}
     >
       {!imageUrl && (
