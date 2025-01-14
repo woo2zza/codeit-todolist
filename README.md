@@ -30,9 +30,7 @@
 
 ### 메인 페이지
 
-<!-- ![alt text](README/record1.gif)
-
-![alt text](README/record2.gif) -->
+![alt text](README/record1.gif) -->
 
 - 해야 할 일인 todo와 완료된 일인 done을 구분하여 확인할 수 있습니다.
 - 상단 입력창에 할 일을 입력한 후 추가 버튼을 클릭하면 할 일이 생성됩니다.
